@@ -54,14 +54,6 @@ svg {
     flex-direction: column;
     align-items: center;
 }
-.clear-search {
-    position: relative;
-    top: 0;
-    right: 3rem;
-    width: 3rem;
-    cursor: pointer;
-    visibility: hidden;
-  }
 
 .flex-card-date {
     display: flex;

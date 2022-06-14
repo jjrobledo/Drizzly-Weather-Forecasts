@@ -179,11 +179,6 @@ const getWeatherData = function (lat, lon) {
 locSearch.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     e.preventDefault();
-    if (locSearch.value && clearSearch.style.visibility !== "visible") {
-      clearSearch.style.visibility = "visible";
-    } else if (!locSearch.value) {
-      clearSearch.style.visibility = "hidden";
-    }
     const [city, state] = e.target.value.match(/\b(\w+)\b/g);
     console.log(city, state);
     findLocation(city, state);
