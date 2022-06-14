@@ -8,6 +8,8 @@
   }
 
 body {
+    margin: 0;
+    padding: 0;
     height: 100vh;
     background: #FF5F6D;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to bottom, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
