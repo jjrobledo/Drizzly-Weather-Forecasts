@@ -9,12 +9,15 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(0deg, #181818, #4f2469, #694924);
-    background-size: 400% 400%;
+    background: #FF5F6D;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+/*     background-size: 400% 400%;
+ */
  /*    -webkit-animation: AnimationName 24s ease ;
     -moz-animation: AnimationName 24s ease ; */
-    animation: AnimationName 24s ease-in-out infinite;
+/*     animation: AnimationName 24s ease-in-out infinite;*/
     color: #fff;
     font-size: 10px;
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
@@ -43,7 +46,8 @@ svg {
     font-size: 1.5rem;
     font-weight: 400;
     text-align: center;
-    background-color: rgb(220, 220, 220);
+    background-color: rgba(255, 255, 255, 0.85);
+    color:rgba(0, 0, 0, 0.621);
 }
 
 #input:hover, #input:focus {
