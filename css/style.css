@@ -14,12 +14,6 @@ body {
     background: #FF5F6D;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-/*     background-size: 400% 400%;
- */
- /*    -webkit-animation: AnimationName 24s ease ;
-    -moz-animation: AnimationName 24s ease ; */
-/*     animation: AnimationName 24s ease-in-out infinite;*/
     color: #fff;
     font-size: 10px;
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
@@ -86,7 +80,12 @@ svg {
 
 }
 
-
+.hi-low-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .flex-card {
     display: flex;
@@ -95,6 +94,7 @@ svg {
     align-items: center;
     
 }
+
 
 .flex-info-row {
   display: flex;
@@ -245,10 +245,16 @@ svg {
 
   @media only screen and (max-width: 600px) {
 
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
     body {
         margin: 0;
         padding: 0;
         height: 100vh;
+        max-width: 100%;
         background: #FF5F6D;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to bottom, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to bottom, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -282,6 +288,7 @@ svg {
         text-align: center;
         background-color: rgba(255, 255, 255, 0.85);
         color:rgba(0, 0, 0, 0.621);
+        
     }
     
     #input:hover, #input:focus {
@@ -295,22 +302,40 @@ svg {
     
     .flex-card-date {
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
         font-size: 2.8rem;
         color: #fff;
     }
+    .flex-card-date:last-child{
+        margin-bottom: 2rem;
+    }
+    .hi-low-icon {
+
+        padding-left: 1.5rem;
+    }
+    h3.high, h3.low {
+        margin: 0;
+        padding: 0;
+    }
+    svg.high-svg {
+        display: none;
+    }
+    svg.low-svg {
+        display: none;
+    }
     .card-div {
+  
         display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
-        gap: 4rem;
-      
+        gap: 1rem;
     }
     .card {
-        width: 280px;
-        height: 22rem;
+        width: 20rem;
+        height: 8rem;
         font-size: 1.8rem;
         color: #1d2021;
         background-color: #fff;
@@ -320,23 +345,31 @@ svg {
     
     .flex-card {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        flex-grow: 1;
+        overflow: auto;
+        justify-content: space-evenly;
         align-items: center;
-        
     }
     
     .flex-info-row {
       display: flex;
-      column-gap: 1rem;
+      flex-direction: column;
+      column-gap: 5rem;
       justify-content: space-evenly;
+      align-items: baseline;
     }
     
     .flex-info-col {
         min-width: 7rem;
+        margin: .7rem 0 .7rem 0;
         flex: 50%;
         display: flex;
         justify-content: space-evenly;
+    }
+
+    .sun{
+        display: none;
     }
     
     .title {
@@ -355,24 +388,25 @@ svg {
     }
     
     .wi {
-        font-size: 2.2rem;
+        font-size: 1.5rem;
     }
     .high {
-        margin-top: 1rem;;
-        margin-bottom: 1.2rem;
+        margin: 0;
+        padding: 0;
         font-size: 1.2rem;
     }
 
     .low {
-        margin-top: 1.2rem;
-        margin-bottom: 1rem;
+        margin: 0;
+        padding:0;
         font-size: 1.2rem;
     }
     .forecast-description {
-        font-size: 1rem;
+        font-size: .8rem;
         font-weight: 400;
-        padding: 0 2rem;
-        text-align: center;
+        margin: 0;
+        padding: 0 .9rem;
+        text-align: justify;
     }
     .info .wi  {
         font-size: 1rem;
@@ -381,14 +415,17 @@ svg {
     .info {
         font-size: 1rem;
     }
-    h3.flex-info-col {
-        margin-top: 0;
+
+    .sunrise-pop {
+        display: flex;
     }
+ 
+
     .date {
         padding: 0;
         margin-top: 0;
         margin-bottom: .8rem;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         font-weight: 400;
     }
     .alerts svg {
