@@ -218,8 +218,7 @@ p.humid, p.rain {
     backdrop-filter: blur(3px);
     z-index: 5;
   }
-
-
+  
 /* desktop */
 @media screen and (min-width: 960px) {
 * {

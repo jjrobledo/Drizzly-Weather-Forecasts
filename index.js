@@ -1,5 +1,3 @@
-***REMOVED***
-***REMOVED***
 const cardContainer = document.querySelector(".card-section");
 const locationText = document.querySelector(".location");
 const clearSearch = document.querySelector(".clear-search");
