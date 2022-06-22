@@ -250,7 +250,6 @@ locSearch.addEventListener("keypress", function (e) {
     e.preventDefault();
     //match(/\b(\w+)\b/g)
     const [city, state, country] = e.target.value.split(",");
-    console.log(city, state, country);
     findLocation(city, state, country);
   }
 });
