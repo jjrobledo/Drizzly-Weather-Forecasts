@@ -3,6 +3,7 @@ const locationText = document.querySelector(".location");
 const clearSearch = document.querySelector(".clear-search");
 const locSearch = document.querySelector("[data-search]");
 const body = document.querySelector("body");
+
 const findLocation = function (city, state = "", country = "US") {
   fetch(
     `https://api.geocod.io/v1.7/geocode?format=simple&city=${city}&state=${state}&country=${country}&api_key=${geoApi}`
