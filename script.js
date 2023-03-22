@@ -243,11 +243,6 @@ const getWeatherData = function (lat, lon) {
   )
     .then((response) => response.json())
     .then((data) => {
-      let localTime = new Date(data.current.dt * 1000);
-      localTime = localTime.getHours();
-      let forecastArr = data.daily.slice(0, 5);
-      //setBackground(localTime);
-      console.dir(data);
       const alertsArr = data.alerts;
       generateForecast(forecastArr, alertsArr);
     });
