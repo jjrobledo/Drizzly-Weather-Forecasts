@@ -85,7 +85,6 @@ const weatherIconURL = {
   "volcanic ash": "wi-volcano",
   squalls: "wi-storm-warning",
   tornado: "wi-tornado",
-  "clear sky": "wi-day-sunny",
   "few clouds: 11-25%": "wi-day-cloudy",
   "scattered clouds: 25-50%": "wi-cloud",
   "broken clouds: 51-84%": "wi-cloudy",
