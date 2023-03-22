@@ -1,5 +1,3 @@
-const weatherApi = "20ba3d7d0058c562abc79333792c7909";
-const geoApi = "e5a7e33e5ce2e666a67762636a6ea5ae26eeaab";
 const cardContainer = document.querySelector(".card-div");
 const locationText = document.querySelector(".location");
 const clearSearch = document.querySelector(".clear-search");
@@ -12,15 +10,14 @@ const findLocation = function (city, state = "", country = "US") {
   )
     .then((response) => response.json())
     .then((data) => {
-      locationString = data.address.substring(0, data.address.lastIndexOf(" "));
-      locationText.textContent = locationString;
+      locationText.textContent = data.address.substring(0, data.address.lastIndexOf(" "));
       const { lat, lng: lon } = data;
       getWeatherData(lat, lon);
     });
 };
 
 const windDirection = function (degree) {
-  directions = [
+  let directions = [
     "North",
     "Northeast",
     "East",
@@ -37,8 +34,6 @@ const windDirection = function (degree) {
 const padString = function (value, numSpaces, char) {
   return String(value).padStart(numSpaces, char);
 };
-
-const setBackground = function (hour) {};
 
 const weatherIconURL = {
   "thunderstorm with light rain": "wi-storm-showers",
@@ -125,15 +120,15 @@ const generateForecast = function (arr, alertsArr) {
       weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
     sunrise = new Date(sunrise * 1000);
     sunset = new Date(sunset * 1000);
-    sunriseHours = sunrise.getHours();
-    sunriseMinutes = sunrise.getMinutes();
-    sunsetHours = sunset.getHours();
-    sunsetMinutes = sunset.getMinutes();
+    const sunriseHours = sunrise.getHours();
+    const sunriseMinutes = sunrise.getMinutes();
+    const sunsetHours = sunset.getHours();
+    const sunsetMinutes = sunset.getMinutes();
     date = new Date(date * 1000);
-    month = date.getMonth() + 1;
-    day = String(date.getDate()).padStart(2, "0");
+    const month = date.getMonth() + 1;
+    const day = String(date.getDate()).padStart(2, "0");
     const windDir = windDirection(wind_deg);
-    windSpeed = Math.round(wind_speed);
+    const windSpeed = Math.round(wind_speed);
 
     const weatherText = `${weatherDescription}. ${
       wind_speed > 0 ? `Winds to the ${windDir} up to ${windSpeed} mph` : ""
@@ -249,9 +244,9 @@ const getWeatherData = function (lat, lon) {
   )
     .then((response) => response.json())
     .then((data) => {
-      localTime = new Date(data.current.dt * 1000);
+      let localTime = new Date(data.current.dt * 1000);
       localTime = localTime.getHours();
-      forecastArr = data.daily.slice(0, 5);
+      let forecastArr = data.daily.slice(0, 5);
       //setBackground(localTime);
       console.dir(data);
       const alertsArr = data.alerts;
