@@ -1,8 +1,6 @@
 const cardContainer = document.querySelector(".card-div");
 const locationText = document.querySelector(".location");
-const clearSearch = document.querySelector(".clear-search");
 const locSearch = document.querySelector("[data-search]");
-const body = document.querySelector("body");
 
 const findLocation = function (city, state = "", country = "US") {
   fetch(
