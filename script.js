@@ -108,7 +108,7 @@ const generateForecast = function (arr, alertsArr) {
       sunset,
       pop,
       humidity,
-      weather: [{ main, description: weatherDescription }],
+      weather: [{ description: weatherDescription }],
       temp: { min, max },
       wind_deg,
       wind_speed,
