@@ -241,6 +241,7 @@ const getWeatherData = function (lat, lon) {
   )
     .then((response) => response.json())
     .then((data) => {
+      const forecastArr = data.daily.slice(0, 5);
       const alertsArr = data.alerts;
       generateForecast(forecastArr, alertsArr);
     });
