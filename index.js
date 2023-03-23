@@ -10,7 +10,7 @@ const findLocation = async function (city, state = "", country = "US") {
     const data = await response.json();
     locationText.textContent = data.address.substring(0, data.address.lastIndexOf(" "));
     const { lat, lng: lon } = data;
-    getWeatherData(lat, lon);
+    await getWeatherData(lat, lon);
 
   }
   catch (err) {
@@ -33,70 +33,28 @@ const windDirection = function (degree) {
   return directions[degree];
 };
 
-const padString = function (value, numSpaces, char) {
-  return String(value).padStart(numSpaces, char);
-};
+const padString = (value, numSpaces, char) => String(value).padStart(numSpaces, char);
 
-const weatherIconURL = {
-  "thunderstorm with light rain": "wi-storm-showers",
-  "thunderstorm with rain": "wi-storm-showers",
-  "thunderstorm with heavy rain": "wi-storm-showers",
-  "light thunderstorm": "wi-storm-showers",
-  thunderstorm: "wi-storm-showers",
-  "heavy thunderstorm": "wi-storm-showers",
-  "ragged thunderstorm": "wi-storm-showers",
-  "thunderstorm with light drizzle": "wi-storm-showers",
-  "thunderstorm with drizzle": "wi-storm-showers",
-  "thunderstorm with heavy drizzle": "wi-storm-showers",
-  "light intensity drizzle": "wi-showers",
-  drizzle: "wi-showers",
-  "heavy intensity drizzle": "wi-showers",
-  "light intensity drizzle rain": "wi-showers",
-  "drizzle rain": "wi-showers",
-  "heavy intensity drizzle rain": "wi-showers",
-  "shower rain and drizzle": "wi-showers",
-  "heavy shower rain and drizzle": "wi-showers",
-  "shower drizzle": "wi-showers",
-  "light rain": "wi-day-rain",
-  "moderate rain": "wi-day-rain",
-  "heavy intensity rain": "wi-day-rain",
-  "very heavy rain": "wi-day-rain",
-  "extreme rain": "wi-day-rain",
-  "freezing rain": "wi-sleet",
-  "light intensity shower rain": "wi-rain",
-  "shower rain": "wi-rain",
-  "heavy intensity shower rain": "wi-rain",
-  "ragged shower rain": "wi-rain",
-  "light snow": "wi-snow",
-  snow: "wi-snow",
-  "heavy snow": "wi-snow",
-  sleet: "wi-sleet",
-  "light shower sleet": "wi-sleet",
-  "shower sleet": "wi-sleet",
-  "light rain and snow": "wi-rain-mix",
-  "rain and snow": "wi-rain-mix",
-  "light shower snow": "wi-day-snow",
-  "heavy shower snow": "wi-snow",
-  mist: "wi-fog",
-  smoke: "wi-smoke",
-  haze: "wi-fog",
-  "sand/ dust whirls": "wi-sandstorm",
-  fog: "wi-fog",
-  sand: "wi-sandstorm",
-  dust: "wi-dust",
-  "volcanic ash": "wi-volcano",
-  squalls: "wi-storm-warning",
-  tornado: "wi-tornado",
-  "few clouds: 11-25%": "wi-day-cloudy",
-  "scattered clouds: 25-50%": "wi-cloud",
-  "broken clouds: 51-84%": "wi-cloudy",
-  "overcast clouds: 85-100%": "wi-cloudy",
-  "clear sky": "wi-day-sunny",
-  "few clouds": "wi-day-sunny-overcast",
-  "scattered clouds": "wi-day-cloudy",
-  "overcast clouds": "wi-day-cloudy",
-  "broken clouds": "wi-cloudy",
-};
+const weatherIconPatterns = [
+  { regex: /^thunderstorm/i, icon: 'wi-storm-showers' },
+  { regex: /^drizzle/i, icon: 'wi-showers' },
+  { regex: /^light rain|moderate rain|heavy intensity rain|very heavy rain|extreme rain/i, icon: 'wi-day-rain' },
+  { regex: /^freezing rain/i, icon: 'wi-sleet' },
+  { regex: /^light intensity shower rain|shower rain|heavy intensity shower rain|ragged shower rain/i, icon: 'wi-rain' },
+  { regex: /^light snow|snow|heavy snow/i, icon: 'wi-snow' },
+  { regex: /^sleet|shower sleet|light shower sleet/i, icon: 'wi-sleet' },
+  { regex: /^light rain and snow|rain and snow/i, icon: 'wi-rain-mix' },
+  { regex: /^light shower snow|heavy shower snow/i, icon: 'wi-day-snow' },
+  { regex: /^mist|smoke|haze|fog/i, icon: 'wi-fog' },
+  { regex: /^sand\/dust whirls|sand|dust/i, icon: 'wi-sandstorm' },
+  { regex: /^volcanic ash/i, icon: 'wi-volcano' },
+  { regex: /^squalls/i, icon: 'wi-storm-warning' },
+  { regex: /^tornado/i, icon: 'wi-tornado' },
+  { regex: /^clear sky$/i, icon: 'wi-day-sunny' },
+  { regex: /^few clouds(?!:)/i, icon: 'wi-day-sunny-overcast' },
+  { regex: /^scattered clouds$/i, icon: 'wi-day-cloudy' },
+  { regex: /^broken clouds|overcast clouds$/i, icon: 'wi-cloudy' },
+];
 
 const generateForecast = function (weatherData, alertData) {
   if (cardContainer.textContent.length > 0) {
@@ -132,7 +90,17 @@ const generateForecast = function (weatherData, alertData) {
       wind_speed > 0 ? `Winds to the ${windDir} up to ${windSpeed} mph` : ""
     }`;
 
-    const weatherIcon = weatherIconURL[weatherDescription.toLowerCase()];
+
+    function getWeatherIcon(weatherDescription) {
+      for (const pattern of weatherIconPatterns) {
+        if (pattern.regex.test(weatherDescription)) {
+          return pattern.icon;
+        }
+      }
+      return ''; // Default fallback if no match is found
+    }
+
+    const weatherIcon = getWeatherIcon(weatherDescription.toLowerCase());
 
     let weatherCardHTML = `
     <div class="card-date-container">
