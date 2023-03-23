@@ -1,8 +1,6 @@
 const cardContainer = document.querySelector(".card-section");
 const locationText = document.querySelector(".location");
 const locSearch = document.querySelector("[data-search]");
-let weatherApi = '20ba3d7d0058c562abc79333792c7909'
-let geoApi = 'e5a7e33e5ce2e666a67762636a6ea5ae26eeaab'
 
 
 const findLocation = function (city, state = "", country = "US") {
@@ -133,7 +131,9 @@ const generateForecast = function (arr, alertsArr) {
     const weatherText = `${weatherDescription}. ${
       wind_speed > 0 ? `Winds to the ${windDir} up to ${windSpeed} mph` : ""
     }`;
+    console.log(weatherDescription)
     const weatherIcon = weatherIconURL[weatherDescription.toLowerCase()];
+    console.log(weatherIcon)
     let html = `
     <div class="card-date-container">
             <p class="date">${month + "/" + day}</p>
