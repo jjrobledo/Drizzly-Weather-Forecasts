@@ -28,7 +28,7 @@ body {
     color: var(--foreground-light);
 }
 main {
-    grid-area: 2 / 2 / 3 / 3; 
+    grid-area: 2 / 2 / 3 / 3;
     justify-self: center;
     align-self: center;
 }
@@ -95,19 +95,19 @@ svg {
     margin-bottom: 2rem;
 }
 
-.temps { 
+.temps {
     grid-area: 2 / 2 / 3 / 3;
     justify-self: center;
     align-self: center;
 }
-.forecast-description { 
+.forecast-description {
     grid-area: 2 / 3 / 3 / 4;
     justify-self: center;
     align-self: center;
     padding: 1rem 1rem 1rem 1rem;
 
 }
-.rain-humid-sun { 
+.rain-humid-sun {
     grid-area: 2 / 4 / 3 / 5;
     justify-self: center;
     align-self: center;
@@ -220,6 +220,13 @@ p.humid, p.rain {
     backdrop-filter: blur(3px);
     z-index: 5;
   }
+  .fader {
+    opacity: 0.00;
+    -webkit-transition: .8s all ease-in;
+	-moz-transition: .8s all ease-in;
+	-o-transition: .8s all ease-in;
+	transition: .8s all ease-in;
+  }
   
 /* desktop */
 @media screen and (min-width: 960px) {
@@ -298,18 +305,18 @@ svg {
     flex-direction: column;
 
 }
-.temps { 
-    grid-area: 2 / 2 / 3 / 3; 
+.temps {
+    grid-area: 2 / 2 / 3 / 3;
     justify-items: center;
     align-items: center;
 }
-.forecast-description { 
-    grid-area: 3 / 2 / 4 / 3; 
+.forecast-description {
+    grid-area: 3 / 2 / 4 / 3;
     justify-items: center;
     align-items: center;
     text-align: center;
     }
-.rain-humid-sun { 
+.rain-humid-sun {
     grid-area: 4 / 2 / 5 / 3;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -387,7 +394,7 @@ svg {
     border-radius: 10rem;
     cursor: pointer;
   }
-  
+
   .close-modal-x {
     position: absolute;
     top: 1.2rem;
@@ -409,7 +416,7 @@ svg {
     transform: translate(-50%, -50%);
     width: 70%;
     border-radius: 15px;
-  
+
     background-color: white;
     color:#1d2021;
     font-size: 1.5rem;
@@ -429,7 +436,7 @@ svg {
       padding: .3rem;
       margin-bottom: 1rem;
   }
-  
+
   .overlay {
     position: absolute;
     top: 0;
