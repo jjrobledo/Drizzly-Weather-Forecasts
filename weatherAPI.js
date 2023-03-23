@@ -1,5 +1,7 @@
 import {locationText} from "./main.js";
 import { generateForecast } from './weatherHTML.js'
+
+const weatherApi = process.env.WEATHER_API_KEY
 const getWeatherData = async function (lat, lon) {
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,minutely&appid=${weatherApi}`)
