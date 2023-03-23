@@ -1,23 +1,21 @@
 const cardContainer = document.querySelector(".card-section");
 const locationText = document.querySelector(".location");
 const locSearch = document.querySelector("[data-search]");
-let weatherApi = '20ba3d7d0058c562abc79333792c7909'
-let geoApi = 'e5a7e33e5ce2e666a67762636a6ea5ae26eeaab'
 
 
-const findLocation = function (city, state = "", country = "US") {
-  fetch(
-    `https://api.geocod.io/v1.7/geocode?format=simple&city=${city}&state=${state}&country=${country}&api_key=${geoApi}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      locationText.textContent = data.address.substring(0, data.address.lastIndexOf(" "));
-      const { lat, lng: lon } = data;
-      getWeatherData(lat, lon);
-    })
-    .catch((err) => {
-      locationText.textContent = "Location not found. Please try again.";
-    });
+
+const findLocation = async function (city, state = "", country = "US") {
+  try {
+    const response = await fetch(`https://api.geocod.io/v1.7/geocode?format=simple&city=${city}&state=${state}&country=${country}&api_key=${geoApi}`)
+    const data = await response.json();
+    locationText.textContent = data.address.substring(0, data.address.lastIndexOf(" "));
+    const { lat, lng: lon } = data;
+    getWeatherData(lat, lon);
+
+  }
+  catch (err) {
+    locationText.textContent = "Location not found. Please try again.";
+  }
 };
 
 const windDirection = function (degree) {
@@ -229,16 +227,17 @@ const generateForecast = function (weatherData, alertData) {
   }
 };
 
-const getWeatherData = function (lat, lon) {
-  fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,minutely&appid=${weatherApi}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      const forecastData = data.daily.slice(0, 5);
-      const alertData = data.alerts;
-      generateForecast(forecastData, alertData);
-    });
+const getWeatherData = async function (lat, lon) {
+  try {
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,minutely&appid=${weatherApi}`)
+    const data = await response.json();
+    const forecastData = data.daily.slice(0, 5);
+    const alertData = data.alerts;
+    generateForecast(forecastData, alertData);
+  }
+  catch (err) {
+    locationText.textContent = "Error generating forecast.";
+  }
 };
 
 locSearch.addEventListener("keypress", function (e) {
