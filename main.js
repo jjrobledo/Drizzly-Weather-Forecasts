@@ -11,4 +11,4 @@ locSearch.addEventListener("keypress", async function (e) {
   }
 });
 
-export {locationText}
+export { locationText }

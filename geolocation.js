@@ -1,7 +1,7 @@
 import {locationText} from "./main.js";
 import {getWeatherData} from "./weatherAPI.js";
 
-const geoApi = process.env.GEO_API_KEY
+const geoApi = GEO_API_KEY
 const findLocation = async function (city, state = "", country = "US") {
     try {
         console.log(city,state,country)
