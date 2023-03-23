@@ -90,14 +90,13 @@ const generateForecast = function (weatherData, alertData) {
       wind_speed > 0 ? `Winds to the ${windDir} up to ${windSpeed} mph` : ""
     }`;
 
-
     function getWeatherIcon(weatherDescription) {
       for (const pattern of weatherIconPatterns) {
         if (pattern.regex.test(weatherDescription)) {
           return pattern.icon;
         }
       }
-      return ''; // Default fallback if no match is found
+      return '';
     }
 
     const weatherIcon = getWeatherIcon(weatherDescription.toLowerCase());
