@@ -100,11 +100,11 @@ const weatherIconURL = {
   "broken clouds": "wi-cloudy",
 };
 
-const generateForecast = function (arr, alertsArr) {
+const generateForecast = function (weatherData, alertData) {
   if (cardContainer.textContent.length > 0) {
     cardContainer.textContent = "";
   }
-  arr.forEach((element) => {
+  weatherData.forEach((element) => {
     let {
       dt: date,
       sunrise,
@@ -136,7 +136,7 @@ const generateForecast = function (arr, alertsArr) {
 
     const weatherIcon = weatherIconURL[weatherDescription.toLowerCase()];
 
-    let html = `
+    let weatherCardHTML = `
     <div class="card-date-container">
             <p class="date">${month + "/" + day}</p>
             <section class="card">   
@@ -177,14 +177,14 @@ const generateForecast = function (arr, alertsArr) {
                     <div>
                 </div
     `;
-    cardContainer.insertAdjacentHTML("beforeend", html);
+    cardContainer.insertAdjacentHTML("beforeend", weatherCardHTML);
   });
 
   if (document.querySelector(".alerts")) {
     document.querySelector(".alerts").innerHTML = "";
   }
 
-  if (alertsArr) {
+  if (alertData) {
     const alertIcon = `<svg class="alert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM232 152C232 138.8 242.8 128 256 128s24 10.75 24 24v128c0 13.25-10.75 24-24 24S232 293.3 232 280V152zM256 400c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 385.9 273.4 400 256 400z"/></svg>`;
     const alertHTML = `<div class="alerts">
         <div class="modal hidden">
@@ -194,7 +194,7 @@ const generateForecast = function (arr, alertsArr) {
         </div>`;
     locationText.insertAdjacentHTML("beforeend", alertIcon);
     cardContainer.insertAdjacentHTML("beforeend", alertHTML);
-    alertsArr.forEach(function (e) {
+    alertData.forEach(function (e) {
       const alertModalHTML = `
         <h1>${e.event}</h1>
         <h2>Start: ${new Date(e.start * 1000).toString()}</h2>
@@ -235,9 +235,9 @@ const getWeatherData = function (lat, lon) {
   )
     .then((response) => response.json())
     .then((data) => {
-      const forecastArr = data.daily.slice(0, 5);
-      const alertsArr = data.alerts;
-      generateForecast(forecastArr, alertsArr);
+      const forecastData = data.daily.slice(0, 5);
+      const alertData = data.alerts;
+      generateForecast(forecastData, alertData);
     });
 };
 
