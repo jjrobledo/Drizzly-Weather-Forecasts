@@ -1,6 +1,8 @@
 const cardContainer = document.querySelector(".card-section");
 const locationText = document.querySelector(".location");
 const locSearch = document.querySelector("[data-search]");
+let weatherApi = '20ba3d7d0058c562abc79333792c7909'
+let geoApi = 'e5a7e33e5ce2e666a67762636a6ea5ae26eeaab'
 
 
 const findLocation = function (city, state = "", country = "US") {
@@ -68,18 +70,18 @@ const weatherIconURL = {
   "heavy intensity shower rain": "wi-rain",
   "ragged shower rain": "wi-rain",
   "light snow": "wi-snow",
-  Snow: "wi-snow",
-  "Heavy snow": "wi-snow",
-  Sleet: "wi-sleet",
-  "Light shower sleet": "wi-sleet",
-  "Shower sleet": "wi-sleet",
-  "Light rain and snow": "wi-rain-mix",
-  "Rain and snow": "wi-rain-mix",
-  "Light shower snow": "wi-day-snow",
-  "Heavy shower snow": "wi-snow",
+  snow: "wi-snow",
+  "heavy snow": "wi-snow",
+  sleet: "wi-sleet",
+  "light shower sleet": "wi-sleet",
+  "shower sleet": "wi-sleet",
+  "light rain and snow": "wi-rain-mix",
+  "rain and snow": "wi-rain-mix",
+  "light shower snow": "wi-day-snow",
+  "heavy shower snow": "wi-snow",
   mist: "wi-fog",
-  Smoke: "wi-smoke",
-  Haze: "wi-fog",
+  smoke: "wi-smoke",
+  haze: "wi-fog",
   "sand/ dust whirls": "wi-sandstorm",
   fog: "wi-fog",
   sand: "wi-sandstorm",
@@ -131,9 +133,9 @@ const generateForecast = function (arr, alertsArr) {
     const weatherText = `${weatherDescription}. ${
       wind_speed > 0 ? `Winds to the ${windDir} up to ${windSpeed} mph` : ""
     }`;
-    console.log(weatherDescription)
+
     const weatherIcon = weatherIconURL[weatherDescription.toLowerCase()];
-    console.log(weatherIcon)
+
     let html = `
     <div class="card-date-container">
             <p class="date">${month + "/" + day}</p>
