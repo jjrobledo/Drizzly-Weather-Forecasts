@@ -1,4 +1,5 @@
-import { findLocation } from './geolocation.js';
+import { findLocation } from "./geolocationAPI.js";
+
 const locationText = document.querySelector(".location");
 const locSearch = document.querySelector("[data-search]");
 
@@ -10,4 +11,4 @@ locSearch.addEventListener("keypress", async function (e) {
   }
 });
 
-export {locationText}
+export { locationText };

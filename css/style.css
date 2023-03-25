@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 :root {
     --foreground-light: #fff;
     --foreground-dark: #1d2021
 }
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -12,7 +14,10 @@
     font-family: 'Poppins', Arial, Helvetica, sans-serif;
 }
 
-html, body {overflow-x: hidden !important;width: 100vw !important;}
+html, body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+}
 
 body {
     display: grid;
@@ -20,35 +25,40 @@ body {
     grid-template-rows: .5fr 6fr 10%;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    background: #FF5F6D;  /* fallback for old browsers */
-    background-image: -webkit-linear-gradient(to bottom, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
+    background: #FF5F6D; /* fallback for old browsers */
+    background-image: -webkit-linear-gradient(to bottom, #FFC371, #FF5F6D); /* Chrome 10-25, Safari 5.1-6 */
     background-image: linear-gradient(to bottom, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     height: 100vh;
-    background-attachment:fixed;
+    background-attachment: fixed;
     color: var(--foreground-light);
 }
+
 main {
     grid-area: 2 / 2 / 3 / 3;
     justify-self: center;
     align-self: center;
 }
+
 svg {
     height: 1rem;
 }
+
 .title {
     font-size: 6rem;
     text-align: center;
     margin-top: 2rem;
     padding-bottom: 1.5rem;
 }
+
 .location {
-    font-size:3.5vw;
+    font-size: 3.5vw;
     font-weight: 400;
     max-width: 100vw;
     padding-top: 1.25rem;
     padding-bottom: 2rem;
     text-align: center;
 }
+
 .date {
     display: block;
     font-size: 2rem;
@@ -68,7 +78,7 @@ svg {
     font-weight: 400;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.85);
-    color:rgba(0, 0, 0, 0.621);
+    color: rgba(0, 0, 0, 0.621);
 }
 
 .search-input:hover, .search-input:focus {
@@ -80,6 +90,7 @@ svg {
     flex-direction: column;
     align-items: center;
 }
+
 .card {
     display: grid;
     grid-template-columns: 0.5fr 1fr 2fr 1fr 0.5fr;
@@ -100,6 +111,7 @@ svg {
     justify-self: center;
     align-self: center;
 }
+
 .forecast-description {
     grid-area: 2 / 3 / 3 / 4;
     justify-self: center;
@@ -107,6 +119,7 @@ svg {
     padding: 1rem 1rem 1rem 1rem;
 
 }
+
 .rain-humid-sun {
     grid-area: 2 / 4 / 3 / 5;
     justify-self: center;
@@ -121,27 +134,34 @@ svg {
     text-align: center;
     font-size: 1.5rem;
 }
+
 .high {
     margin-bottom: 1rem;
 }
+
 .low {
     margin-top: 1rem;
 }
+
 .temps > i {
     width: 100%;
     text-align: center;
     font-size: 1.5rem;
 }
+
 .sun {
     display: none;
 }
+
 .rain-humid > p {
     font-size: 1.5rem;
     justify-content: center;
 }
+
 .weather-sun {
     font-size: 1.8rem;
 }
+
 .humid-rain-icon {
     height: 1.4rem;
 }
@@ -168,9 +188,9 @@ p.humid, p.rain {
     background-color: #fff;
     color: #444;
     border-radius: 10rem;
-  }
-  
-  .close-modal-x {
+}
+
+.close-modal-x {
     position: absolute;
     top: 2rem;
     right: 1.2rem;
@@ -179,12 +199,13 @@ p.humid, p.rain {
     cursor: pointer;
     border: none;
     background: none;
-  }
+}
 
-  .hidden {
+.hidden {
     display: none;
-  }
-  .modal {
+}
+
+.modal {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -192,25 +213,26 @@ p.humid, p.rain {
     width: 70%;
     border-radius: 15px;
     background-color: white;
-    color:#1d2021;
+    color: #1d2021;
     font-size: 1.5rem;
     font-family: monospace;
     padding: 6rem;
     box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
     z-index: 10;
-  }
-  .modal h1 {
+}
+
+.modal h1 {
     font-size: 2rem;
     padding: .1rem
 }
 
-  .modal h2 {
-      font-size: 1.1rem;
-      padding: .1rem;
-      margin-bottom: 1rem;
-  }
-  
-  .overlay {
+.modal h2 {
+    font-size: 1.1rem;
+    padding: .1rem;
+    margin-bottom: 1rem;
+}
+
+.overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -219,232 +241,255 @@ p.humid, p.rain {
     background-color: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(3px);
     z-index: 5;
-  }
-  .fader {
+}
+
+.fader {
     opacity: 0.00;
     -webkit-transition: .8s all ease-in;
-	-moz-transition: .8s all ease-in;
-	-o-transition: .8s all ease-in;
-	transition: .8s all ease-in;
-  }
-  
+    -moz-transition: .8s all ease-in;
+    -o-transition: .8s all ease-in;
+    transition: .8s all ease-in;
+}
+
 /* desktop */
 @media screen and (min-width: 960px) {
-* {
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    height: 100vh;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-}
-
-svg {
-    height: 1rem;
-}
-
-.card-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-.title {
-    font-size: 6rem;
-}
-.location {
-    font-size: 3rem;
-    font-weight: 400;
-}
-
-.search-input {
-    width: 30rem;
-    height: 3rem;
-    padding: 2rem 1rem 2rem 1rem;
-    border-radius: 10px;
-    border: none;
-    outline: 0;
-    font-family: inherit;
-    font-size: 1.5rem;
-    font-weight: 400;
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.85);
-    color:rgba(0, 0, 0, 0.621);
-}
-.date {
-    font-size: 3.2rem;
-    width: 20rem;
-}
-.card-section {
-    gap: 2rem;
-}
-.card {
-    display: grid;
-    grid-template-columns: 10% 2fr 10%;
-    grid-template-rows: .5fr repeat(3, 1fr) .5fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    height: 35rem;
-    width: 20rem;
-    font-size: 1.8rem;
-    color: var(--foreground-dark);
-    background-color: var(--foreground-light);
-    border-radius: 10px;
-    margin-bottom: 2rem;
-}
-.card-date-container {
-    display: flex;
-    flex-direction: column;
-
-}
-.temps {
-    grid-area: 2 / 2 / 3 / 3;
-    justify-items: center;
-    align-items: center;
-}
-.forecast-description {
-    grid-area: 3 / 2 / 4 / 3;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
+    * {
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
     }
-.rain-humid-sun {
-    grid-area: 4 / 2 / 5 / 3;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    grid-column-gap: 2px;
-    grid-row-gap: 2px;
-}
 
-.high, .low {
-    text-align: center;
-    font-size: 3rem;
-}
-.high {
-    margin-bottom: 1rem;
-}
-.low {
-    margin-top: 1rem;
-}
-.temps > i {
-    width: 100%;
-    text-align: center;
-    font-size: 3rem;
-}
+    body {
+        height: 100vh;
+    }
 
-.sun {
-    grid-area: 2 / 1 / 3 / 3;
-    display: flex;
-    justify-content: space-between;
-}
-.rain-humid {
-    grid-area: 1 / 1 / 2 / 3;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.2rem;
-}
-.sun > p, .rain-humid > p {
-    font-size: 1.5rem;
-}
-.sun > p {
-    display: contents;
-    gap: 3rem;
-}
-.weather-sun {
-    font-size: 1.5rem;
-}
-.rain {
-    margin: 0;
-}
-.humid-rain-icon {
-    height: 1.8rem;
-}
-.sunrise > p {
-    font-size: 1.5rem;
-    margin-right: 3rem;
-}
-.sunset > p {
-    font-size: 1.5rem;
-}
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    }
 
-.alert-icon {
-    margin-left: 1rem;
-    height: 2rem;
-    fill: rgb(255, 255, 255);
-    cursor: pointer;
-}
+    svg {
+        height: 1rem;
+    }
 
-.show-modal {
-    font-size: 2rem;
-    font-weight: 600;
-    padding: 1.75rem 3.5rem;
-    margin: 5rem 2rem;
-    border: none;
-    background-color: #fff;
-    color: #444;
-    border-radius: 10rem;
-    cursor: pointer;
-  }
+    .card-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 
-  .close-modal-x {
-    position: absolute;
-    top: 1.2rem;
-    right: 2rem;
-    font-size: 5rem;
-    color: #333;
-    cursor: pointer;
-    border: none;
-    background: none;
-  }
+    .title {
+        font-size: 6rem;
+    }
 
-  .hidden {
-    display: none;
-  }
-  .modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    border-radius: 15px;
+    .location {
+        font-size: 3rem;
+        font-weight: 400;
+    }
 
-    background-color: white;
-    color:#1d2021;
-    font-size: 1.5rem;
-    font-family: monospace;
-    padding: 6rem;
+    .search-input {
+        width: 30rem;
+        height: 3rem;
+        padding: 2rem 1rem 2rem 1rem;
+        border-radius: 10px;
+        border: none;
+        outline: 0;
+        font-family: inherit;
+        font-size: 1.5rem;
+        font-weight: 400;
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.85);
+        color: rgba(0, 0, 0, 0.621);
+    }
 
-    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
-    z-index: 10;
-  }
-  .modal h1 {
-    font-size: 4rem;
-    padding: .1rem
-}
+    .date {
+        font-size: 3.2rem;
+        width: 20rem;
+    }
 
-  .modal h2 {
-      font-size: 1.8rem;
-      padding: .3rem;
-      margin-bottom: 1rem;
-  }
+    .card-section {
+        gap: 2rem;
+    }
 
-  .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(3px);
-    z-index: 5;
-  }
+    .card {
+        display: grid;
+        grid-template-columns: 10% 2fr 10%;
+        grid-template-rows: .5fr repeat(3, 1fr) .5fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        height: 35rem;
+        width: 20rem;
+        font-size: 1.8rem;
+        color: var(--foreground-dark);
+        background-color: var(--foreground-light);
+        border-radius: 10px;
+        margin-bottom: 2rem;
+    }
+
+    .card-date-container {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .temps {
+        grid-area: 2 / 2 / 3 / 3;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .forecast-description {
+        grid-area: 3 / 2 / 4 / 3;
+        justify-items: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .rain-humid-sun {
+        grid-area: 4 / 2 / 5 / 3;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 2px;
+        grid-row-gap: 2px;
+    }
+
+    .high, .low {
+        text-align: center;
+        font-size: 3rem;
+    }
+
+    .high {
+        margin-bottom: 1rem;
+    }
+
+    .low {
+        margin-top: 1rem;
+    }
+
+    .temps > i {
+        width: 100%;
+        text-align: center;
+        font-size: 3rem;
+    }
+
+    .sun {
+        grid-area: 2 / 1 / 3 / 3;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .rain-humid {
+        grid-area: 1 / 1 / 2 / 3;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.2rem;
+    }
+
+    .sun > p, .rain-humid > p {
+        font-size: 1.5rem;
+    }
+
+    .sun > p {
+        display: contents;
+        gap: 3rem;
+    }
+
+    .weather-sun {
+        font-size: 1.5rem;
+    }
+
+    .rain {
+        margin: 0;
+    }
+
+    .humid-rain-icon {
+        height: 1.8rem;
+    }
+
+    .sunrise > p {
+        font-size: 1.5rem;
+        margin-right: 3rem;
+    }
+
+    .sunset > p {
+        font-size: 1.5rem;
+    }
+
+    .alert-icon {
+        margin-left: 1rem;
+        height: 2rem;
+        fill: rgb(255, 255, 255);
+        cursor: pointer;
+    }
+
+    .show-modal {
+        font-size: 2rem;
+        font-weight: 600;
+        padding: 1.75rem 3.5rem;
+        margin: 5rem 2rem;
+        border: none;
+        background-color: #fff;
+        color: #444;
+        border-radius: 10rem;
+        cursor: pointer;
+    }
+
+    .close-modal-x {
+        position: absolute;
+        top: 1.2rem;
+        right: 2rem;
+        font-size: 5rem;
+        color: #333;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .modal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        border-radius: 15px;
+
+        background-color: white;
+        color: #1d2021;
+        font-size: 1.5rem;
+        font-family: monospace;
+        padding: 6rem;
+
+        box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+        z-index: 10;
+    }
+
+    .modal h1 {
+        font-size: 4rem;
+        padding: .1rem
+    }
+
+    .modal h2 {
+        font-size: 1.8rem;
+        padding: .3rem;
+        margin-bottom: 1rem;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: 5;
+    }
 }

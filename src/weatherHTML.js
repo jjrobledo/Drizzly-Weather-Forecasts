@@ -1,120 +1,20 @@
+import { getWeatherIcon, padString, windDirection } from "./utils.js";
+import { locationText } from "./index.js";
+
 const cardContainer = document.querySelector(".card-section");
-const locationText = document.querySelector(".location");
-const clearSearch = document.querySelector(".clear-search");
-const locSearch = document.querySelector("[data-search]");
-const body = document.querySelector("body");
 
-const findLocation = function (city, state = "", country = "US") {
-  fetch(
-    `https://api.geocod.io/v1.7/geocode?format=simple&city=${city}&state=${state}&country=${country}&api_key=${geoApi}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      locationString = data.address.substring(0, data.address.lastIndexOf(" "));
-      locationText.textContent = locationString;
-      const { lat, lng: lon } = data;
-      getWeatherData(lat, lon);
-    })
-    .catch((err) => {
-      locationText.textContent = "Location not found. Please try again.";
-    });
-};
-
-const windDirection = function (degree) {
-  directions = [
-    "North",
-    "Northeast",
-    "East",
-    "Southeast",
-    "South",
-    "Southwest",
-    "West",
-    "Northwest",
-  ];
-  degree = Math.round((degree * 8) / 360);
-  return directions[degree];
-};
-
-const padString = function (value, numSpaces, char) {
-  return String(value).padStart(numSpaces, char);
-};
-
-const setBackground = function (hour) {};
-
-const weatherIconURL = {
-  "thunderstorm with light rain": "wi-storm-showers",
-  "thunderstorm with rain": "wi-storm-showers",
-  "thunderstorm with heavy rain": "wi-storm-showers",
-  "light thunderstorm": "wi-storm-showers",
-  thunderstorm: "wi-storm-showers",
-  "heavy thunderstorm": "wi-storm-showers",
-  "ragged thunderstorm": "wi-storm-showers",
-  "thunderstorm with light drizzle": "wi-storm-showers",
-  "thunderstorm with drizzle": "wi-storm-showers",
-  "thunderstorm with heavy drizzle": "wi-storm-showers",
-  "light intensity drizzle": "wi-showers",
-  drizzle: "wi-showers",
-  "heavy intensity drizzle": "wi-showers",
-  "light intensity drizzle rain": "wi-showers",
-  "drizzle rain": "wi-showers",
-  "heavy intensity drizzle rain": "wi-showers",
-  "shower rain and drizzle": "wi-showers",
-  "heavy shower rain and drizzle": "wi-showers",
-  "shower drizzle": "wi-showers",
-  "light rain": "wi-day-rain",
-  "moderate rain": "wi-day-rain",
-  "heavy intensity rain": "wi-day-rain",
-  "very heavy rain": "wi-day-rain",
-  "extreme rain": "wi-day-rain",
-  "freezing rain": "wi-sleet",
-  "light intensity shower rain": "wi-rain",
-  "shower rain": "wi-rain",
-  "heavy intensity shower rain": "wi-rain",
-  "ragged shower rain": "wi-rain",
-  "light snow": "wi-snow",
-  Snow: "wi-snow",
-  "Heavy snow": "wi-snow",
-  Sleet: "wi-sleet",
-  "Light shower sleet": "wi-sleet",
-  "Shower sleet": "wi-sleet",
-  "Light rain and snow": "wi-rain-mix",
-  "Rain and snow": "wi-rain-mix",
-  "Light shower snow": "wi-day-snow",
-  "Heavy shower snow": "wi-snow",
-  mist: "wi-fog",
-  Smoke: "wi-smoke",
-  Haze: "wi-fog",
-  "sand/ dust whirls": "wi-sandstorm",
-  fog: "wi-fog",
-  sand: "wi-sandstorm",
-  dust: "wi-dust",
-  "volcanic ash": "wi-volcano",
-  squalls: "wi-storm-warning",
-  tornado: "wi-tornado",
-  "clear sky": "wi-day-sunny",
-  "few clouds: 11-25%": "wi-day-cloudy",
-  "scattered clouds: 25-50%": "wi-cloud",
-  "broken clouds: 51-84%": "wi-cloudy",
-  "overcast clouds: 85-100%": "wi-cloudy",
-  "clear sky": "wi-day-sunny",
-  "few clouds": "wi-day-sunny-overcast",
-  "scattered clouds": "wi-day-cloudy",
-  "overcast clouds": "wi-day-cloudy",
-  "broken clouds": "wi-cloudy",
-};
-
-const generateForecast = function (arr, alertsArr) {
+const generateForecast = function (weatherData, alertData) {
   if (cardContainer.textContent.length > 0) {
     cardContainer.textContent = "";
   }
-  arr.forEach((element) => {
+  weatherData.forEach((element) => {
     let {
       dt: date,
       sunrise,
       sunset,
       pop,
       humidity,
-      weather: [{ main, description: weatherDescription }],
+      weather: [{ description: weatherDescription }],
       temp: { min, max },
       wind_deg,
       wind_speed,
@@ -123,21 +23,23 @@ const generateForecast = function (arr, alertsArr) {
       weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1);
     sunrise = new Date(sunrise * 1000);
     sunset = new Date(sunset * 1000);
-    sunriseHours = sunrise.getHours();
-    sunriseMinutes = sunrise.getMinutes();
-    sunsetHours = sunset.getHours();
-    sunsetMinutes = sunset.getMinutes();
+    const sunriseHours = sunrise.getHours();
+    const sunriseMinutes = sunrise.getMinutes();
+    const sunsetHours = sunset.getHours();
+    const sunsetMinutes = sunset.getMinutes();
     date = new Date(date * 1000);
-    month = date.getMonth() + 1;
-    day = String(date.getDate()).padStart(2, "0");
+    const month = date.getMonth() + 1;
+    const day = String(date.getDate()).padStart(2, "0");
     const windDir = windDirection(wind_deg);
-    windSpeed = Math.round(wind_speed);
+    const windSpeed = Math.round(wind_speed);
 
     const weatherText = `${weatherDescription}. ${
       wind_speed > 0 ? `Winds to the ${windDir} up to ${windSpeed} mph` : ""
     }`;
-    const weatherIcon = weatherIconURL[weatherDescription.toLowerCase()];
-    let html = `
+
+    const weatherIcon = getWeatherIcon(weatherDescription.toLowerCase());
+
+    let weatherCardHTML = `
     <div class="card-date-container">
             <p class="date">${month + "/" + day}</p>
             <section class="card">   
@@ -178,14 +80,14 @@ const generateForecast = function (arr, alertsArr) {
                     <div>
                 </div
     `;
-    cardContainer.insertAdjacentHTML("beforeend", html);
+    cardContainer.insertAdjacentHTML("beforeend", weatherCardHTML);
   });
 
   if (document.querySelector(".alerts")) {
     document.querySelector(".alerts").innerHTML = "";
   }
 
-  if (alertsArr) {
+  if (alertData) {
     const alertIcon = `<svg class="alert-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM232 152C232 138.8 242.8 128 256 128s24 10.75 24 24v128c0 13.25-10.75 24-24 24S232 293.3 232 280V152zM256 400c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 385.9 273.4 400 256 400z"/></svg>`;
     const alertHTML = `<div class="alerts">
         <div class="modal hidden">
@@ -195,7 +97,7 @@ const generateForecast = function (arr, alertsArr) {
         </div>`;
     locationText.insertAdjacentHTML("beforeend", alertIcon);
     cardContainer.insertAdjacentHTML("beforeend", alertHTML);
-    alertsArr.forEach(function (e) {
+    alertData.forEach(function (e) {
       const alertModalHTML = `
         <h1>${e.event}</h1>
         <h2>Start: ${new Date(e.start * 1000).toString()}</h2>
@@ -230,27 +132,4 @@ const generateForecast = function (arr, alertsArr) {
   }
 };
 
-const getWeatherData = function (lat, lon) {
-  fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&exclude=hourly,minutely&appid=${weatherApi}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      localTime = new Date(data.current.dt * 1000);
-      localTime = localTime.getHours();
-      forecastArr = data.daily.slice(0, 5);
-      //setBackground(localTime);
-      console.dir(data);
-      const alertsArr = data.alerts;
-      generateForecast(forecastArr, alertsArr);
-    });
-};
-
-locSearch.addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    //match(/\b(\w+)\b/g)
-    const [city, state, country] = e.target.value.split(",");
-    findLocation(city, state, country);
-  }
-});
+export { generateForecast };
