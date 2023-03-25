@@ -1,5 +1,5 @@
 import { windDirection, padString, getWeatherIcon } from './utils.js';
-import {locationText} from "./main.js";
+import {locationText} from "./index.js";
 
 const cardContainer = document.querySelector(".card-section");
 
