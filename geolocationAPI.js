@@ -1,4 +1,4 @@
-import {locationText} from "./main.js";
+import {locationText} from "./index.js";
 import {getWeatherData} from "./weatherAPI.js";
 
 const findLocation = async function (city, state = "", country = "US") {
