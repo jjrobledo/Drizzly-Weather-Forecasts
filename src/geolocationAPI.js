@@ -21,9 +21,6 @@ const findLocation = async function (city, state = "", country = "US") {
     const { lat, lng: lon } = data;
     await getWeatherData(lat, lon);
   } catch (err) {
-    console.error(err);
-    console.error(err.stack);
-    console.log(err.stack);
     locationText.textContent = "Error fetching geocoding data.";
   }
 };
